@@ -1,4 +1,4 @@
 # E-RUN-J-RUN
-# Running Game
-# Members -> Hyemi, Sangwoo, Sangyeon, Juengeun
+## Running Game
+### Members -> Hyemi, Sangwoo, Sangyeon, Juengeun
 
