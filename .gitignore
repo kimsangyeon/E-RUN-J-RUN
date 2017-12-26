@@ -1,2 +1,7 @@
+#vsCode
+.vscode
+
 #npm
 node_modules
+dist
+
