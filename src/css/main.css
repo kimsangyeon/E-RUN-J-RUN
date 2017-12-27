@@ -1,0 +1,54 @@
+body {
+    height: 100%;
+    width: 100%
+}
+
+#main {
+    display: inline-block;
+    width: 80%;
+}
+
+#main_section {
+    display: block;
+}
+
+#game_header {
+    background: #937bae;
+    text-align: center;
+}
+
+#advertising_section {
+    display: inline-block;
+    background: #eaeaed;
+    float: right;
+    width: 20%;
+    height: 100%;
+}
+
+#game_container {
+    width: fit-content;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin: auto;
+}
+
+#main_user_game {
+    display: inline-block;
+    border: 1px solid #bdbdbd;
+    width: 600px;
+    height: 330px;
+}
+
+#other_user_game_container {
+    display: inline-block;
+    width: fit-content;
+    height: 330px;
+}
+
+.other_user_game {
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid #bdbdbd;
+    width: 200px;
+    height: 100px;
+}
