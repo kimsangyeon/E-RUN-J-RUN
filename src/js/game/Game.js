@@ -2,7 +2,15 @@ import Canvas from './Canvas';
 
 class Game {
     constructor() {
-        this.canvas = new Canvas();
+        this.canvas = null;
+
+        this.init();
+        
+    }
+
+    init() {
+        let id = 1;
+        this.canvas = new Canvas(id);
     }
 }
 
