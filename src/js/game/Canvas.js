@@ -1,3 +1,4 @@
+import cnst from './cnst';
 import Charecter from './Character';
 
 class Canvas {
@@ -15,10 +16,19 @@ class Canvas {
     init() {
         let elMain = document.getElementById('main');
         this.canvas = document.createElement('canvas');
-        this.canvas.width = 480; //px
-        this.canvas.height = 270; //px
+        this.canvas.width = cnst.canvasWidth; //px
+        this.canvas.height = cnst.canvasHeight; //px
         this.context = this.canvas.getContext('2d');
         elMain.appendChild(this.canvas);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.keyCode === 38) {
+                this.charecter.isJump = true;
+                setTimeout(function() {
+                    this.charecter.isJump = false;
+                }.bind(this), 500);
+            }
+        });
     }
 
     initCharecter() {
@@ -27,12 +37,16 @@ class Canvas {
 
         this.charecter = new Charecter({
             context: this.context,
-            width: 44,
-            height: 44,
+            width: cnst.charWidht,
+            height: cnst.charHeight,
+            x: cnst.charX,
+            y: cnst.charY,
             image: charImage,
-            ticksperFrame: 10,
-            numberOfFrames: 10
+            ticksperFrame: cnst.ticksperFrame,
+            numberOfFrames: cnst.numberOfFrames
         });
+        this.charecter.isJump = false;
+
         setTimeout(function() {
             this.renderCharecter();
         }.bind(this), 500);
@@ -42,7 +56,11 @@ class Canvas {
         window.requestAnimationFrame(this.renderCharecter.bind(this));
 
         this.charecter.update();
-        this.charecter.render();
+        if (!this.charecter.isJump) {
+            this.charecter.render();
+        } else {
+            this.charecter.jumpRendr();
+        }
     }
 }
 

@@ -1,20 +1,36 @@
+import cnst from './cnst';
+
 class Charecter {
     constructor(options) {
         this.options = options;
     }
 
     render() {
-        this.options.context.clearRect(0, 0, this.options.width, this.options.height);
+        this.clearRender();
+        this.drawImage();
+    }
+
+    jumpRendr() {
+        this.clearRender();
+        this.drawImage(true);
+    }
+
+    drawImage(jump = false) {
+        let jumpingY = jump ? cnst.jumpingY : 0;
         this.options.context.drawImage(
             this.options.image,
             this.options.frameIndex * this.options.width,
             0,
             this.options.width,
             this.options.height,
-            0,
-            0,
+            this.options.x,
+            this.options.y - jumpingY,
             this.options.width,
             this.options.height);
+    }
+
+    clearRender() {
+        this.options.context.clearRect(this.options.x, this.options.y - cnst.jumpingY, this.options.width, this.options.height + cnst.jumpingY);
     }
 
     update() {
