@@ -4,13 +4,13 @@ const cnst = {
     canvasHeight: 270,
 
     //Charecter
-    charWidht: 44,
-    charHeight: 44,
+    charWidht: 60,
+    charHeight: 95,
     charX: 0,
-    charY: 226,
+    charY: 175,
     ticksperFrame: 10,
-    numberOfFrames: 10,
-    jumpingY: 45
+    numberOfFrames: 7,
+    jumpingY: 95
 }
 
 export default cnst;

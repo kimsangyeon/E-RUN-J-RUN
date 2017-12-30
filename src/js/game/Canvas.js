@@ -33,7 +33,7 @@ class Canvas {
 
     initCharecter() {
         let charImage = new Image();
-        charImage.src = "./images/coin.png";
+        charImage.src = "./images/run.png";
 
         this.charecter = new Charecter({
             context: this.context,
