@@ -10,7 +10,7 @@ const cnst = {
     charY: 175,
     ticksperFrame: 10,
     numberOfFrames: 7,
-    jumpingY: 95
+    jumpingY: 45
 }
 
 export default cnst;
