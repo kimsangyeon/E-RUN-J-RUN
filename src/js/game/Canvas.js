@@ -22,7 +22,7 @@ class Canvas {
         elMain.appendChild(this.canvas);
 
         document.addEventListener('keydown', (e) => {
-            if (e.keyCode === 38) {
+            if (e.keyCode === 38 && this.charecter.gravity === 0) {
                 this.charecter.isJump = true;
                 setTimeout(function() {
                     this.charecter.isJump = false;
@@ -55,12 +55,16 @@ class Canvas {
     renderCharecter() {
         window.requestAnimationFrame(this.renderCharecter.bind(this));
 
-        this.charecter.update();
-        if (!this.charecter.isJump) {
-            this.charecter.render();
+        if (this.charecter.isJump) {
+            this.charecter.gravity += 1;
         } else {
-            this.charecter.jumpRendr();
+            if (this.charecter.gravity !== 0) {
+                this.charecter.gravity -= 1;
+            }
         }
+
+        this.charecter.update();
+        this.charecter.render();
     }
 }
 

@@ -3,6 +3,7 @@ import cnst from './cnst';
 class Charecter {
     constructor(options) {
         this.options = options;
+        this.gravity = 0;
     }
 
     render() {
@@ -10,13 +11,7 @@ class Charecter {
         this.drawImage();
     }
 
-    jumpRendr() {
-        this.clearRender();
-        this.drawImage(true);
-    }
-
-    drawImage(jump = false) {
-        let jumpingY = jump ? cnst.jumpingY : 0;
+    drawImage() {
         this.options.context.drawImage(
             this.options.image,
             this.options.frameIndex * this.options.width,
@@ -24,13 +19,13 @@ class Charecter {
             this.options.width,
             this.options.height,
             this.options.x,
-            this.options.y - jumpingY,
+            this.options.y - this.gravity,
             this.options.width,
             this.options.height);
     }
 
     clearRender() {
-        this.options.context.clearRect(this.options.x, this.options.y - cnst.jumpingY, this.options.width, this.options.height + cnst.jumpingY);
+        this.options.context.clearRect(0, 0, cnst.canvasWidth, cnst.canvasHeight);
     }
 
     update() {
