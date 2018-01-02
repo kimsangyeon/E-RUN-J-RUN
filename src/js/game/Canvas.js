@@ -1,6 +1,10 @@
 import cnst from './cnst';
 import Charecter from './Character';
 
+/**
+ * Canvas Class
+ * Charecter 및 Block instance 관리
+ */
 class Canvas {
     constructor(id) {
         this.canvas = null;
@@ -31,6 +35,9 @@ class Canvas {
         });
     }
 
+    /**
+     * Charecter Image load 및 생성
+     */
     initCharecter() {
         let charImage = new Image();
         charImage.src = "./images/run.png";
@@ -52,6 +59,10 @@ class Canvas {
         }.bind(this), 500);
     }
 
+    /**
+     * Charecter Image render
+     * requestAnimationFrame 사용하여 함수 지속 호출하여 Image render
+     */
     renderCharecter() {
         window.requestAnimationFrame(this.renderCharecter.bind(this));
 
