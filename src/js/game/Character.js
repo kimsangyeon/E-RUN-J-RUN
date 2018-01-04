@@ -5,8 +5,17 @@ import cnst from './cnst';
  * Charecter Image 관리
  */
 class Charecter {
-    constructor(options) {
-        this.options = options;
+    constructor(context, image) {
+        this.context = context, // canvas context
+        this.image = image, // canvas character image
+        this.width = cnst.charWidth, // charecter width
+        this.height = cnst.charHeight, // charecter height
+        this.x = cnst.charX, // charecter x
+        this.y = cnst.charY, // charecter y
+        this.frameIndex = 0, // charecter image frame index
+        this.tickCount = 0, // image animation count
+        this.ticksperFrame = cnst.ticksperFrame, // animation count frame
+        this.numberOfFrames = cnst.numberOfFrames // charecter image frame num
         this.gravity = 0;
     }
 
@@ -23,49 +32,39 @@ class Charecter {
      * context drawImage 호출
      */
     drawImage() {
-        this.options.context.drawImage(
-            this.options.image,
-            this.options.frameIndex * this.options.width,
+        this.context.drawImage(
+            this.image,
+            this.frameIndex * this.width,
             0,
-            this.options.width,
-            this.options.height,
-            this.options.x,
-            this.options.y - this.gravity,
-            this.options.width,
-            this.options.height);
+            this.width,
+            this.height,
+            this.x,
+            this.y - this.gravity,
+            this.width,
+            this.height);
     }
 
     /**
      * Canvas ClearRect 호출
      */
     clearRender() {
-        this.options.context.clearRect(0, 0, cnst.canvasWidth, cnst.canvasHeight);
+        this.context.clearRect(0, 0, cnst.canvasWidth, cnst.canvasHeight);
     }
 
     /**
      * Image Frame Index update
      */
     update() {
-        let frameIndex = this.options.frameIndex || 0;
-        let tickCount = this.options.tickCount || 0;
-        let ticksperFrame = this.options.ticksperFrame || 0;
-        let numberOfFrames = this.options.numberOfFrames || 1;
+        this.tickCount += 1;
+        if (this.tickCount > this.ticksperFrame) {
+            this.tickCount = 0;
 
-        tickCount += 1;
-        if (tickCount > ticksperFrame) {
-            tickCount = 0;
-
-            if (frameIndex < numberOfFrames - 1) {
-                frameIndex +=1;
+            if (this.frameIndex < this.numberOfFrames - 1) {
+                this.frameIndex +=1;
             } else {
-                frameIndex = 0;
+                this.frameIndex = 0;
             }
         }
-
-        this.options.frameIndex = frameIndex;
-        this.options.tickCount = tickCount;
-        this.options.ticksperFrame = ticksperFrame;
-        this.options.numberOfFrames = numberOfFrames;
     }
 }
 

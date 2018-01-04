@@ -4,7 +4,7 @@ const cnst = {
     canvasHeight: 270,
 
     //Charecter
-    charWidht: 60,
+    charWidth: 60,
     charHeight: 95,
     charX: 0,
     charY: 175,

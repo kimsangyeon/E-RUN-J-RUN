@@ -42,16 +42,7 @@ class Canvas {
         let charImage = new Image();
         charImage.src = "./images/run.png";
 
-        this.charecter = new Charecter({
-            context: this.context,
-            width: cnst.charWidht,
-            height: cnst.charHeight,
-            x: cnst.charX,
-            y: cnst.charY,
-            image: charImage,
-            ticksperFrame: cnst.ticksperFrame,
-            numberOfFrames: cnst.numberOfFrames
-        });
+        this.charecter = new Charecter(this.context, charImage);
         this.charecter.isJump = false;
 
         setTimeout(function() {
