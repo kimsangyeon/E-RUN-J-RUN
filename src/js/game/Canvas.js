@@ -31,6 +31,11 @@ class Canvas {
                 setTimeout(function() {
                     this.charecter.isJump = false;
                 }.bind(this), 500);
+            } else if (this.charecter.gravity !== 0) {
+                this.charecter.isJumpDouble = true;
+                setTimeout(function() {
+                    this.charecter.isJumpDouble = false;
+                }.bind(this), 500);
             }
         });
     }
@@ -57,7 +62,7 @@ class Canvas {
     renderCharecter() {
         window.requestAnimationFrame(this.renderCharecter.bind(this));
 
-        if (this.charecter.isJump) {
+        if (this.charecter.isJump || this.charecter.isJumpDouble) {
             this.charecter.gravity += 1;
         } else {
             if (this.charecter.gravity !== 0) {
