@@ -17,6 +17,9 @@ class Canvas {
         this.initCharecter();
     }
 
+    /**
+     * canvas 초기화 및 이벤트 할당
+     */
     init() {
         let elMain = document.getElementById('main');
         this.canvas = document.createElement('canvas');
@@ -33,8 +36,10 @@ class Canvas {
                 }.bind(this), 500);
             } else if (this.charecter.gravity !== 0) {
                 this.charecter.isJumpDouble = true;
+                this.charecter.image.src = "./images/wall-jump.png";
                 setTimeout(function() {
                     this.charecter.isJumpDouble = false;
+                    this.charecter.image.src = "./images/run.png";
                 }.bind(this), 500);
             }
         });
@@ -70,7 +75,6 @@ class Canvas {
             }
         }
 
-        this.charecter.update();
         this.charecter.render();
     }
 }
