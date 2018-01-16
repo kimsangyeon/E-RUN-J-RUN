@@ -1,5 +1,6 @@
 import cnst from './cnst';
 import Charecter from './Character';
+import Block from './Block';
 
 /**
  * Canvas Class
@@ -10,11 +11,13 @@ class Canvas {
         this.canvas = null;
         this.context = null;
         this.charecter = null;
+        this.block = null;
 
         this.id = id;
 
         this.init();
         this.initCharecter();
+        this.initBlock();
     }
 
     /**
@@ -66,7 +69,6 @@ class Canvas {
      */
     renderCharecter() {
         window.requestAnimationFrame(this.renderCharecter.bind(this));
-
         if (this.charecter.isJump || this.charecter.isJumpDouble) {
             this.charecter.gravity += 1;
         } else {
@@ -76,6 +78,30 @@ class Canvas {
         }
 
         this.charecter.render();
+    }
+
+    initBlock() {
+        let blockImage = new Image();
+        let sBlockImage = new Image();
+
+        blockImage.src = "./images/block.png";
+        sBlockImage.src = "./images/specialBlock.png";
+
+        let oBlockImage = {
+            blockImage : blockImage,
+            sBlockImage : sBlockImage
+        };
+
+        this.block = new Block(this.context, oBlockImage);
+
+        setTimeout(function() {
+            this.renderBlock();
+        }.bind(this), 500);
+    }
+
+    renderBlock() {
+        window.requestAnimationFrame(this.renderBlock.bind(this));
+        this.block.render();
     }
 }
 

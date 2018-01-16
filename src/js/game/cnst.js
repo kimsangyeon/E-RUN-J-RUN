@@ -12,7 +12,19 @@ const cnst = {
     numberOfFrames: 7,
     jumpingY: 45,
     jumpWidht: 83,
-    jumpHeight: 125
+    jumpHeight: 125,
+
+    //Block
+    blockWidth: 80,
+    blockHeight: 80,
+    blockX: 480,
+    blockY: 210,
+
+    //Special Block
+    sBlockWidth: 120,
+    sBlockHeight: 120,
+    sBlockX: 480,
+    sBlockY: 80
 }
 
 export default cnst;
