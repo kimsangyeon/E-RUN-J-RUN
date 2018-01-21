@@ -56,15 +56,8 @@ class Charecter {
      * Image Frame Index update
      */
     update() {
-        if (this.isJumpDouble) {
-            this.width = cnst.jumpWidht;
-            this.height = cnst.jumpHeight;
-            this.frameIndex = 0;
-            return;
-        } else {
-            this.width = cnst.charWidth;
-            this.height = cnst.charHeight;
-        }
+        this.width = cnst.charWidth;
+        this.height = cnst.charHeight;
 
         this.tickCount += 1;
         if (this.tickCount > this.ticksperFrame) {

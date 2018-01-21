@@ -32,18 +32,19 @@ class Canvas {
         elMain.appendChild(this.canvas);
 
         document.addEventListener('keydown', (e) => {
-            if (e.keyCode === 38 && this.charecter.gravity === 0) {
-                this.charecter.isJump = true;
-                setTimeout(function() {
-                    this.charecter.isJump = false;
-                }.bind(this), 500);
-            } else if (this.charecter.gravity !== 0) {
-                this.charecter.isJumpDouble = true;
-                this.charecter.image.src = "./images/wall-jump.png";
-                setTimeout(function() {
-                    this.charecter.isJumpDouble = false;
-                    this.charecter.image.src = "./images/run.png";
-                }.bind(this), 500);
+            if (this.charecter.isEvent) {
+                if (e.keyCode === 38 && this.charecter.gravity === 0) {
+                    this.charecter.isJump = true;
+                    setTimeout(function() {
+                        this.charecter.isJump = false;
+                    }.bind(this), 500);
+                } else if (this.charecter.gravity !== 0) {
+                    this.charecter.isJumpDouble = true;
+                    this.charecter.isEvent = false;
+                    setTimeout(function() {
+                        this.charecter.isJumpDouble = false;
+                    }.bind(this), 500);
+                }
             }
         });
     }
@@ -70,10 +71,12 @@ class Canvas {
     renderCharecter() {
         window.requestAnimationFrame(this.renderCharecter.bind(this));
         if (this.charecter.isJump || this.charecter.isJumpDouble) {
-            this.charecter.gravity += 1;
+            this.charecter.gravity += 1.5;
         } else {
             if (this.charecter.gravity !== 0) {
-                this.charecter.gravity -= 1;
+                this.charecter.gravity -= 1.5;
+            } else {
+                this.charecter.isEvent = true;
             }
         }
 
