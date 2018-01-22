@@ -6,21 +6,21 @@ const cnst = {
     //Charecter
     charWidth: 60,
     charHeight: 95,
-    charX: 0,
-    charY: 190,
+    charX: 50,
+    charY: 200,
     ticksperFrame: 10,
     numberOfFrames: 7,
     jumpingY: 45,
 
     //Block
-    blockWidth: 80,
-    blockHeight: 80,
+    blockWidth: 40,
+    blockHeight: 40,
     blockX: 480,
-    blockY: 210,
+    blockY: 255,
 
     //Special Block
-    sBlockWidth: 120,
-    sBlockHeight: 120,
+    sBlockWidth: 60,
+    sBlockHeight: 60,
     sBlockX: 480,
     sBlockY: 80
 }
