@@ -25,7 +25,7 @@ class Canvas {
      */
     init() {
         let elMain = document.getElementById('main');
-        this.canvas = document.createElement('canvas');
+        this.canvas = document.getElementById('game');
         this.canvas.width = cnst.canvasWidth; //px
         this.canvas.height = cnst.canvasHeight; //px
         this.context = this.canvas.getContext('2d');
