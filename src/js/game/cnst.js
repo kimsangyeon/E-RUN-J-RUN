@@ -13,10 +13,10 @@ const cnst = {
     jumpingY: 45,
 
     //Block
-    blockWidth: 40,
-    blockHeight: 40,
+    blockWidth: 25,
+    blockHeight: 38,
     blockX: 480,
-    blockY: 270,
+    blockY: 272,
 
     //Special Block
     sBlockWidth: 60,
