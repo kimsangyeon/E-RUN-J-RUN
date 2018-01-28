@@ -103,8 +103,15 @@ class Canvas {
     }
 
     renderBlock() {
-        window.requestAnimationFrame(this.renderBlock.bind(this));
+        const id = window.requestAnimationFrame(this.renderBlock.bind(this));
         this.block.render();
+
+        if (this.block.image.src.indexOf('special') === -1 && (this.charecter.x + this.charecter.width > this.block.x
+        && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y)) {
+            
+        }
+
+        
     }
 }
 

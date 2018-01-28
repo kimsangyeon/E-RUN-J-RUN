@@ -16,7 +16,7 @@ const cnst = {
     blockWidth: 40,
     blockHeight: 40,
     blockX: 480,
-    blockY: 255,
+    blockY: 270,
 
     //Special Block
     sBlockWidth: 60,
