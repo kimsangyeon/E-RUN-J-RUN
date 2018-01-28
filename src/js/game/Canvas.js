@@ -14,6 +14,8 @@ class Canvas {
         this.block = null;
 
         this.id = id;
+        this.charFrameId = null;
+        this.blockFrameId = null;
 
         this.init();
         this.initCharecter();
@@ -69,7 +71,7 @@ class Canvas {
      * requestAnimationFrame 사용하여 함수 지속 호출하여 Image render
      */
     renderCharecter() {
-        window.requestAnimationFrame(this.renderCharecter.bind(this));
+        this.charFrameId = window.requestAnimationFrame(this.renderCharecter.bind(this));
         if (this.charecter.isJump || this.charecter.isJumpDouble) {
             this.charecter.gravity += 1.5;
         } else {
@@ -103,12 +105,15 @@ class Canvas {
     }
 
     renderBlock() {
-        const id = window.requestAnimationFrame(this.renderBlock.bind(this));
+        this.blockFrameId = window.requestAnimationFrame(this.renderBlock.bind(this));
         this.block.render();
 
-        if (this.block.image.src.indexOf('special') === -1 && (this.charecter.x + this.charecter.width > this.block.x
-        && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y)) {
-            
+        if (this.block.image.src.indexOf('special') === -1 
+        && (this.charecter.x + this.charecter.width > this.block.x
+        && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y
+        && this.charecter.x < this.block.x + this.block.width)) {
+            window.cancelAnimationFrame(this.charFrameId);
+            window.cancelAnimationFrame(this.blockFrameId);
         }
 
         
