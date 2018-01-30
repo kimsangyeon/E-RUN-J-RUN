@@ -2,6 +2,7 @@ import Game from './game/Game';
 import runImage from './game/images/run.png';
 import blockImage from './game/images/block.png';
 import specialBlockImage from './game/images/specialBlock.png';
+import coinImage from './game/images/coin.png';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

@@ -1,6 +1,7 @@
 import cnst from './cnst';
 import Charecter from './Character';
 import Block from './Block';
+import Coin from './Coin';
 
 /**
  * Canvas Class
@@ -12,14 +13,17 @@ class Canvas {
         this.context = null;
         this.charecter = null;
         this.block = null;
+        this.coin = null;
 
         this.id = id;
         this.charFrameId = null;
         this.blockFrameId = null;
+        this.coinFrameId = null;
 
         this.init();
         this.initCharecter();
         this.initBlock();
+        this.initCoin();
     }
 
     /**
@@ -115,8 +119,30 @@ class Canvas {
             window.cancelAnimationFrame(this.charFrameId);
             window.cancelAnimationFrame(this.blockFrameId);
         }
+    }
 
-        
+    initCoin() {
+        let coinImage = new Image();
+        coinImage.src = "./images/coin.png";
+
+        this.coin = new Coin(this.context, coinImage);
+
+        setTimeout(function() {
+            this.renderCoin();
+        }.bind(this), 500);
+    }
+
+    renderCoin() {
+        this.coinFrameId = window.requestAnimationFrame(this.renderCoin.bind(this));
+        this.coin.render();
+
+        if (this.coin.image.src.indexOf('special') === -1 
+        && (this.charecter.x + this.charecter.width > this.block.x
+        && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y
+        && this.charecter.x < this.block.x + this.block.width)) {
+            this.coin.drawEffect(this.charecter.x, this.charecter.y);
+            this.coin.clearRender();
+        }
     }
 }
 
