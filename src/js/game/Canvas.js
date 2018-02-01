@@ -118,6 +118,7 @@ class Canvas {
         && this.charecter.x < this.block.x + this.block.width)) {
             window.cancelAnimationFrame(this.charFrameId);
             window.cancelAnimationFrame(this.blockFrameId);
+            window.cancelAnimationFrame(this.coinFrameId);
         }
     }
 
