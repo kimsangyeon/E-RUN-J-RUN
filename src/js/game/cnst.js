@@ -22,7 +22,13 @@ const cnst = {
     sBlockWidth: 60,
     sBlockHeight: 60,
     sBlockX: 480,
-    sBlockY: 80
+    sBlockY: 80,
+
+    //Coin
+    coinWidth: 24,
+    coinHeight: 24,
+    coinX: 480,
+    coinY: 272
 }
 
 export default cnst;
