@@ -1,29 +1,43 @@
-var mysql = require('mysql');
+var express     = require('express');
+var app         = express();
+var bodyParser  = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-// Your password has expired. To log in you must change it using a client that supports expired passwordsㅡ
-// ALTER USER `root`@`localhost` IDENTIFIED BY '새로운 비밀번호', `root`@`localhost` PASSWORD EXPIRE NEVER;
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '1234'
+var router = require('./routes')(app)
+
+var port = process.env.PORT || 8080;
+// [RUN SERVER]
+var server = app.listen(port, function(){
+ console.log("Express server has started on port " + port)
 });
 
-connection.connect();
-
-connection.query('create database test', function (err) {
-    if (err) {
-        throw err;
-    }
+// CONNECT TO MONGODB SERVER
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function(){
+    // CONNECTED TO MONGODB SERVER
+    console.log("Connected to mongod server");
 });
 
-connection.query('use test');
+var Score = require('./models/score');
 
-connection.query('create table rank( score INT, id VARCHAR(50) );');
+app.post('/save', function(req, res){
+    var score = new Score();
+    score.title = req.body.name;
+    score.author = req.body.author;
+    score.published_date = new Date(req.body.published_date);
 
-connection.query("insert into rank values(100, 'testId');");
+    score.save(function(err){
+        if(err){
+            console.error(err);
+            res.json({result: 0});
+            return;
+        }
 
-connection.query("SELECT scroe FROM rank", function (err, result, fields) {
-    if (err) throw err; 
-    console.log(result);
+        res.json({result: 1});
+
+    });
 });
-connection.end(); // END
+
+mongoose.connect('mongodb://localhost/mongodb_tutorial');
