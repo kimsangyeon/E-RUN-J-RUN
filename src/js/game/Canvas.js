@@ -139,12 +139,18 @@ class Canvas {
         && this.charecter.x < this.block.x + this.block.width - this.block.width / 2)) {
             this.crash = true;
             this.controller.gameOver();
+            window.cancelAnimationFrame(this.charFrameId);
+            window.cancelAnimationFrame(this.blockFrameId);
+            window.cancelAnimationFrame(this.coinFrameId);
         } else if (this.block.image.src.indexOf('ice') !== -1
         && (this.charecter.x + this.charecter.width > this.block.x + this.block.sWidth / 2
         && this.charecter.y - this.charecter.gravity < this.block.y + this.block.sHeight
         && this.charecter.x < this.block.x + this.block.sWidth - this.block.sWidth / 2)) {
             this.crash = true;
             this.controller.gameOver();
+            window.cancelAnimationFrame(this.charFrameId);
+            window.cancelAnimationFrame(this.blockFrameId);
+            window.cancelAnimationFrame(this.coinFrameId);
         }
     }
 
