@@ -137,11 +137,10 @@ class Canvas {
         this.coinFrameId = window.requestAnimationFrame(this.renderCoin.bind(this));
         this.coin.render();
 
-        if (this.coin.image.src.indexOf('special') === -1 
-        && (this.charecter.x + this.charecter.width > this.block.x
+        if (this.charecter.x + this.charecter.width > this.block.x
         && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y
-        && this.charecter.x < this.block.x + this.block.width)) {
-            this.coin.drawEffect(this.charecter.x, this.charecter.y);
+        && this.charecter.x < this.block.x + this.block.width) {
+            // this.coin.drawEffect(this.charecter.x, this.charecter.y);
             this.coin.clearRender();
         }
     }
