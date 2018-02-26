@@ -7,12 +7,17 @@ const cnst = {
     charWidth: 60,
     charHeight: 95,
     charX: 50,
-    charY: 200,
+    charY: 205,
     ticksperFrame: 10,
     numberOfFrames: 7,
     jumpingY: 45,
 
-    //Block
+    //Slide Charecter
+    charSlideWidth: 70,
+    charSlideHeight: 70,
+    charSlideX: 50,
+    charSlideY: 230,
+
     //fireBlock
     blockWidth: 25,
     blockHeight: 38,

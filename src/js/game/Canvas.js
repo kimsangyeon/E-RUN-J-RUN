@@ -51,6 +51,14 @@ class Canvas {
                         this.charecter.isJumpDouble = false;
                     }.bind(this), 500);
                 }
+                if (e.keyCode === 40 && this.charecter.gravity ===0) {
+                    this.charecter.isSlide = true;
+                }
+            }
+        });
+        document.addEventListener('keyup', (e) => {
+            if (e.keyCode === 40) {
+                this.charecter.isSlide = false;
             }
         });
     }
@@ -59,8 +67,15 @@ class Canvas {
      * Charecter Image load 및 생성
      */
     initCharecter() {
-        let charImage = new Image();
-        charImage.src = "./images/run.png";
+        let runImage = new Image();
+        let slideImage = new Image();
+        runImage.src = "./images/run.png";
+        slideImage.src = "./images/slide.png";
+
+        let charImage = {
+            run: runImage,
+            slide: slideImage
+        };
 
         this.charecter = new Charecter(this.context, charImage);
         this.charecter.isJump = false;

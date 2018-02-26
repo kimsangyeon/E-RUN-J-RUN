@@ -7,7 +7,8 @@ import cnst from './cnst';
 class Charecter {
     constructor(context, image) {
         this.context = context, // canvas context
-        this.image = image, // canvas character image
+        this.runImage = image.run, // canvas character run image
+        this.slideImage = image.slide, // canvas character slide image
         this.width = cnst.charWidth, // charecter width
         this.height = cnst.charHeight, // charecter height
         this.x = cnst.charX, // charecter x
@@ -33,16 +34,22 @@ class Charecter {
      * context drawImage 호출
      */
     drawImage() {
+        const image = this.isSlide ? this.slideImage : this.runImage;
+        const x = this.isSlide ? cnst.charSlideX : this.x;
+        const y = this.isSlide ? cnst.charSlideY : this.y;
+        const width = this.isSlide ? cnst.charSlideWidth : this.width;
+        const height = this.isSlide ? cnst.charSlideHeight : this.height;
+        const frameIndex = this.isSlide ? 0 : this.frameIndex * width;
         this.context.drawImage(
-            this.image,
-            this.frameIndex * this.width,
+            image,
+            frameIndex,
             0,
-            this.width,
-            this.height,
-            this.x,
-            this.y - this.gravity,
-            this.width,
-            this.height);
+            width,
+            height,
+            x,
+            y - this.gravity,
+            width,
+            height);
     }
 
     /**

@@ -1,5 +1,6 @@
 import Game from './game/Game';
 import runImage from './game/images/run.png';
+import slideImage from './game/images/slide.png';
 import blockImage from './game/images/block.png';
 import iceBlockImage from './game/images/iceBlock.png';
 import coinImage from './game/images/coin.png';
