@@ -89,12 +89,15 @@ class Canvas {
         this.charecter.render();
     }
 
+    /**
+     * block 초기화
+     */
     initBlock() {
         let blockImage = new Image();
         let sBlockImage = new Image();
 
         blockImage.src = "./images/block.png";
-        sBlockImage.src = "./images/specialBlock.png";
+        sBlockImage.src = "./images/iceBlock.png";
 
         let oBlockImage = {
             blockImage : blockImage,
@@ -112,7 +115,7 @@ class Canvas {
         this.blockFrameId = window.requestAnimationFrame(this.renderBlock.bind(this));
         this.block.render();
 
-        if (this.block.image.src.indexOf('special') === -1 
+        if (this.block.image.src.indexOf('ice') === -1 
         && (this.charecter.x + this.charecter.width > this.block.x
         && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y
         && this.charecter.x < this.block.x + this.block.width)) {
