@@ -149,15 +149,25 @@ class Canvas {
 
     initCoin() {
         let coinImage = new Image();
+        let coin2Image = new Image();
         coinImage.src = "./images/coin.png";
+        coin2Image.src = "./images/coin2.png";
 
-        this.coin = new Coin(this.context, coinImage);
+        this.coin = new Coin(this.context, {
+            coinImage: coinImage,
+            coin2Image: coin2Image
+        });
 
         setTimeout(function() {
             this.renderCoin();
         }.bind(this), 500);
     }
 
+    renderEffectCoin() {
+        var reqId = window.requestAnimationFrame(this.renderEffectCoin.bind(this));
+        this.coin.renderEffect(this.charecter.x, this.charecter.y);
+        window.cancelAnimationFrame(reqId);
+    }
     renderCoin() {
         this.coinFrameId = window.requestAnimationFrame(this.renderCoin.bind(this));
         this.coin.render();
@@ -165,7 +175,7 @@ class Canvas {
         if (this.charecter.x + this.charecter.width > this.block.x
         && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y
         && this.charecter.x < this.block.x + this.block.width) {
-            // this.coin.drawEffect(this.charecter.x, this.charecter.y);
+            this.renderEffectCoin();
             this.coin.clearRender();
         }
     }
