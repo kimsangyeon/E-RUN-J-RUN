@@ -1,10 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var score = new Schema({
+var scoreSchema = new Schema({
     id: String,
-    score: Number,
-    date: { type: Date, default: Date.now  }
+    score: Number
 });
 
 module.exports = mongoose.model('score', scoreSchema);

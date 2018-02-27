@@ -1,10 +1,15 @@
 import React from 'react';
+import Game from './Game';
+import Score from './Score';
 import cnst from '../game/cnst';
 
 class App extends React.Component {
     render(){
         return (
-            <canvas id='game'tabIndex="0" ref='cavas' width={cnst.canvasWidth} height={cnst.canvasHeight}/>
+            <div>
+                <Game/>
+                <Score/>
+            </div>
         );
     }
 }
