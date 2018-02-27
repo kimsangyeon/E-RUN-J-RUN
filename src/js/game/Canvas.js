@@ -2,6 +2,7 @@ import cnst from './cnst';
 import Charecter from './Character';
 import Block from './Block';
 import Coin from './Coin';
+import Score from './Score';
 
 /**
  * Canvas Class
@@ -14,6 +15,7 @@ class Canvas {
         this.charecter = null;
         this.block = null;
         this.coin = null;
+        this.score = null;
 
         this.id = id;
         this.charFrameId = null;
@@ -24,6 +26,7 @@ class Canvas {
         this.initCharecter();
         this.initBlock();
         this.initCoin();
+        this.initScore();
     }
 
     /**
@@ -35,6 +38,7 @@ class Canvas {
         this.canvas.width = cnst.canvasWidth; //px
         this.canvas.height = cnst.canvasHeight; //px
         this.context = this.canvas.getContext('2d');
+        
         elMain.appendChild(this.canvas);
 
         document.addEventListener('keydown', (e) => {
@@ -149,6 +153,10 @@ class Canvas {
         setTimeout(function() {
             this.renderCoin();
         }.bind(this), 500);
+    }
+
+    initScore() {
+        this.score = new Score();
     }
 
     renderCoin() {

@@ -8,8 +8,10 @@ import coinImage from './game/images/coin.png';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './render/App';
+import Score from './render/Score';
 
 const rootElement = document.getElementById('main');
+ReactDOM.render(<Score />, rootElement);
 ReactDOM.render(<App />, rootElement);
 
 window.Game = new Game();
