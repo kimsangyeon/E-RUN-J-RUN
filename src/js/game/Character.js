@@ -35,10 +35,10 @@ class Charecter {
      */
     drawImage() {
         const image = this.isSlide ? this.slideImage : this.runImage;
-        const x = this.isSlide ? cnst.charSlideX : this.x;
-        const y = this.isSlide ? cnst.charSlideY : this.y;
-        const width = this.isSlide ? cnst.charSlideWidth : this.width;
-        const height = this.isSlide ? cnst.charSlideHeight : this.height;
+        const x = this.x;
+        const y = this.y;
+        const width = this.width;
+        const height = this.height;
         const frameIndex = this.isSlide ? 0 : this.frameIndex * width;
         this.context.drawImage(
             image,
@@ -63,8 +63,10 @@ class Charecter {
      * Image Frame Index update
      */
     update() {
-        this.width = cnst.charWidth;
-        this.height = cnst.charHeight;
+        this.width = this.isSlide ? cnst.charSlideWidth : cnst.charWidth;
+        this.height = this.isSlide ? cnst.charSlideHeight : cnst.charHeight;
+        this.x = this.isSlide ? cnst.charSlideX : cnst.charX;
+        this.y = this.isSlide ? cnst.charSlideY : cnst.charY;
 
         this.tickCount += 1;
         if (this.tickCount > this.ticksperFrame) {
