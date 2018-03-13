@@ -1,6 +1,7 @@
 import cnst from './cnst';
 import Charecter from './Character';
 import Block from './Block';
+import Score from './Score';
 import Coin from './Coin';
 
 /**
@@ -14,6 +15,8 @@ class Canvas {
         this.charecter = null;
         this.block = null;
         this.coin = null;
+        this.score = null;
+        this.elScore = null;
 
         this.id = id;
         this.charFrameId = null;
@@ -23,6 +26,7 @@ class Canvas {
         this.init();
         this.initCharecter();
         this.initBlock();
+        this.initScore();
         this.initCoin();
     }
 
@@ -84,6 +88,13 @@ class Canvas {
             this.renderCharecter();
         }.bind(this), 500);
     }
+    
+    initScore() {
+        this.elScore = document.getElementById('eScoreBoard');
+        this.score = new Score(this.elScore);
+        
+        this.score.componentDidMount();
+    }
 
     /**
      * Charecter Image render
@@ -137,6 +148,7 @@ class Canvas {
             window.cancelAnimationFrame(this.charFrameId);
             window.cancelAnimationFrame(this.blockFrameId);
             window.cancelAnimationFrame(this.coinFrameId);
+            this.score.componentDidClear();
         } else if (this.block.image.src.indexOf('ice') !== -1
         && (this.charecter.x + this.charecter.width > this.block.x + this.block.sWidth / 2
         && this.charecter.y - this.charecter.gravity < this.block.y + this.block.sHeight
@@ -144,6 +156,7 @@ class Canvas {
             window.cancelAnimationFrame(this.charFrameId);
             window.cancelAnimationFrame(this.blockFrameId);
             window.cancelAnimationFrame(this.coinFrameId);
+            this.score.componentDidClear();
         }
     }
 

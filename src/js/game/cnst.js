@@ -3,6 +3,10 @@ const cnst = {
     canvasWidth: 480,
     canvasHeight: 300,
 
+    //ScoreBoard
+    boardWidth: '100px',
+    boradHeight: '40px',
+
     //Charecter
     charWidth: 60,
     charHeight: 95,
