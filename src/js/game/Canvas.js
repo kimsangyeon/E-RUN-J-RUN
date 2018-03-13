@@ -130,6 +130,7 @@ class Canvas {
         this.blockFrameId = window.requestAnimationFrame(this.renderBlock.bind(this));
         this.block.render();
 
+<<<<<<< HEAD
         if (this.block.image.src.indexOf('ice') === -1
         && (this.charecter.x + this.charecter.width > this.block.x + this.block.width / 2
         && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y + this.block.height / 2
@@ -145,6 +146,16 @@ class Canvas {
             window.cancelAnimationFrame(this.blockFrameId);
             window.cancelAnimationFrame(this.coinFrameId);
         }
+=======
+        // if (this.block.image.src.indexOf('ice') === -1 
+        // && (this.charecter.x + this.charecter.width > this.block.x
+        // && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y
+        // && this.charecter.x < this.block.x + this.block.width)) {
+        //     window.cancelAnimationFrame(this.charFrameId);
+        //     window.cancelAnimationFrame(this.blockFrameId);
+        //     window.cancelAnimationFrame(this.coinFrameId);
+        // }
+>>>>>>> 723f3deb98ef93fc2701769acc6f94d423681573
     }
 
     initCoin() {
