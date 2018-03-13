@@ -33,8 +33,8 @@ class Coin {
 		this.drawImage();
 	}
 
-	renderEffect(charX, charY) {
-		this.updateEffect();
+	renderEffect(charX, charY, reqId) {
+		this.updateEffect(reqId);
 		this.drawEffect(charX, charY);
 	}
 
@@ -62,7 +62,7 @@ class Coin {
 		);
 	}
 
-	updateEffect() {
+	updateEffect(reqId) {
         this.tickCount += 1;
         if (this.tickCount > this.ticksperFrame) {
             this.tickCount = 0;
@@ -70,13 +70,14 @@ class Coin {
             if (this.frameIndex < 10 - 1) {
                 this.frameIndex += 1;
             } else {
+				window.cancelAnimationFrame(reqId);
                 this.frameIndex = 0;
             }
         }
 	}
 
-	clearRender() {
-		this.context.clearRect(0, 0, cnst.coinWidth, cnst.coinHeight);
+	clearRender(x, y) {
+		this.context.clearRect(x, y, cnst.coinWidth, cnst.coinHeight);
 	}
 }
 

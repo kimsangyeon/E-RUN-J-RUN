@@ -20,6 +20,8 @@ class Canvas {
         this.blockFrameId = null;
         this.coinFrameId = null;
 
+        this.crash = false;
+
         this.init();
         this.initCharecter();
         this.initBlock();
@@ -130,11 +132,11 @@ class Canvas {
         this.blockFrameId = window.requestAnimationFrame(this.renderBlock.bind(this));
         this.block.render();
 
-<<<<<<< HEAD
         if (this.block.image.src.indexOf('ice') === -1
         && (this.charecter.x + this.charecter.width > this.block.x + this.block.width / 2
         && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y + this.block.height / 2
         && this.charecter.x < this.block.x + this.block.width - this.block.width / 2)) {
+            this.crash = true;
             window.cancelAnimationFrame(this.charFrameId);
             window.cancelAnimationFrame(this.blockFrameId);
             window.cancelAnimationFrame(this.coinFrameId);
@@ -142,27 +144,18 @@ class Canvas {
         && (this.charecter.x + this.charecter.width > this.block.x + this.block.sWidth / 2
         && this.charecter.y - this.charecter.gravity < this.block.y + this.block.sHeight
         && this.charecter.x < this.block.x + this.block.sWidth - this.block.sWidth / 2)) {
+            this.crash = true;
             window.cancelAnimationFrame(this.charFrameId);
             window.cancelAnimationFrame(this.blockFrameId);
             window.cancelAnimationFrame(this.coinFrameId);
         }
-=======
-        // if (this.block.image.src.indexOf('ice') === -1 
-        // && (this.charecter.x + this.charecter.width > this.block.x
-        // && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y
-        // && this.charecter.x < this.block.x + this.block.width)) {
-        //     window.cancelAnimationFrame(this.charFrameId);
-        //     window.cancelAnimationFrame(this.blockFrameId);
-        //     window.cancelAnimationFrame(this.coinFrameId);
-        // }
->>>>>>> 723f3deb98ef93fc2701769acc6f94d423681573
     }
 
     initCoin() {
         let coinImage = new Image();
         let coin2Image = new Image();
         coinImage.src = "./images/coin.png";
-        coin2Image.src = "./images/coin2.png";
+        coin2Image.src = "./images/coinEffect.png";
 
         this.coin = new Coin(this.context, {
             coinImage: coinImage,
@@ -170,24 +163,30 @@ class Canvas {
         });
 
         setTimeout(function() {
-            this.renderCoin();
+            if (!this.crash) {
+                this.renderCoin();
+            }
         }.bind(this), 500);
     }
 
     renderEffectCoin() {
         var reqId = window.requestAnimationFrame(this.renderEffectCoin.bind(this));
-        this.coin.renderEffect(this.charecter.x, this.charecter.y);
-        window.cancelAnimationFrame(reqId);
+        this.coin.renderEffect(this.charecter.x, this.charecter.y, reqId);
     }
     renderCoin() {
         this.coinFrameId = window.requestAnimationFrame(this.renderCoin.bind(this));
         this.coin.render();
 
-        if (this.charecter.x + this.charecter.width > this.block.x
-        && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y
-        && this.charecter.x < this.block.x + this.block.width) {
+        if (this.charecter.x + this.charecter.width > this.coin.x
+        && this.charecter.y + this.charecter.height - this.charecter.gravity > this.coin.y
+        && this.charecter.x < this.coin.x + this.coin.width) {
+            this.coin.clearRender(this.coin.x, this.coin.y);
+            window.cancelAnimationFrame(this.coinFrameId);
             this.renderEffectCoin();
-            this.coin.clearRender();
+
+            if (!this.crash) {
+                this.initCoin();
+            }
         }
     }
 }
