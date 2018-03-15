@@ -1,7 +1,6 @@
 import cnst from './cnst';
 import Charecter from './Character';
 import Block from './Block';
-import Score from './Score';
 import Coin from './Coin';
 
 /**
@@ -9,16 +8,15 @@ import Coin from './Coin';
  * Charecter 및 Block instance 관리
  */
 class Canvas {
-    constructor(id) {
+    constructor(id, controller) {
         this.canvas = null;
         this.context = null;
         this.charecter = null;
         this.block = null;
         this.coin = null;
-        this.score = null;
-        this.elScore = null;
 
         this.id = id;
+        this.controller = controller;
         this.charFrameId = null;
         this.blockFrameId = null;
         this.coinFrameId = null;
@@ -28,7 +26,6 @@ class Canvas {
         this.init();
         this.initCharecter();
         this.initBlock();
-        this.initScore();
         this.initCoin();
     }
 
@@ -90,13 +87,6 @@ class Canvas {
             this.renderCharecter();
         }.bind(this), 500);
     }
-    
-    initScore() {
-        this.elScore = document.getElementById('eScoreBoard');
-        this.score = new Score(this.elScore);
-        
-        this.score.componentDidMount();
-    }
 
     /**
      * Charecter Image render
@@ -148,19 +138,13 @@ class Canvas {
         && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y + this.block.height / 2
         && this.charecter.x < this.block.x + this.block.width - this.block.width / 2)) {
             this.crash = true;
-            window.cancelAnimationFrame(this.charFrameId);
-            window.cancelAnimationFrame(this.blockFrameId);
-            window.cancelAnimationFrame(this.coinFrameId);
-            this.score.componentDidClear();
+            this.controller.gameOver();
         } else if (this.block.image.src.indexOf('ice') !== -1
         && (this.charecter.x + this.charecter.width > this.block.x + this.block.sWidth / 2
         && this.charecter.y - this.charecter.gravity < this.block.y + this.block.sHeight
         && this.charecter.x < this.block.x + this.block.sWidth - this.block.sWidth / 2)) {
             this.crash = true;
-            window.cancelAnimationFrame(this.charFrameId);
-            window.cancelAnimationFrame(this.blockFrameId);
-            window.cancelAnimationFrame(this.coinFrameId);
-            this.score.componentDidClear();
+            this.controller.gameOver();
         }
     }
 
