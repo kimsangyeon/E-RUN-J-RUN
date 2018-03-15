@@ -4,6 +4,7 @@ import slideImage from './game/images/slide.png';
 import blockImage from './game/images/block.png';
 import iceBlockImage from './game/images/iceBlock.png';
 import coinImage from './game/images/coin.png';
+import coin2Image from './game/images/coinEffect.png';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

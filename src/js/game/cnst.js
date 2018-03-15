@@ -38,7 +38,13 @@ const cnst = {
     coinWidth: 24,
     coinHeight: 24,
     coinX: 480,
-    coinY: 272
+    coinY: 272,
+
+    //Coin2
+    coinEffectWidth: 240,
+    coinEffectHeight: 24,
+    ticksperCoinFrame: 4,
+    numberOfCoinFrames: 10
 }
 
 export default cnst;

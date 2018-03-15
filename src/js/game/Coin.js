@@ -1,15 +1,19 @@
 import cnst from './cnst';
 
 class Coin {
-	constructor(context, image) {
+	constructor(context, images) {
 		this.context = context;
-		this.image = image;
+		this.coinImage = images.coinImage;
+		this.coin2Image = images.coin2Image;
 
 		this.width = cnst.coinWidth;
 		this.height = cnst.coinHeight;
 		this.x = cnst.coinX;
 		this.y = cnst.coinY;
-
+        this.frameIndex = 0, // charecter image frame index
+        this.tickCount = 0, // image animation count
+        this.ticksperFrame = cnst.ticksperCoinFrame, // animation count frame
+        this.numberOfFrames = cnst.numberOfCoinFrames // charecter image frame num
 		this.speed = 6;
 	}
 
@@ -29,9 +33,14 @@ class Coin {
 		this.drawImage();
 	}
 
+	renderEffect(charX, charY, reqId) {
+		this.updateEffect(reqId);
+		this.drawEffect(charX, charY);
+	}
+
 	drawImage() {
 		this.context.drawImage(
-			this.image,
+			this.coinImage,
 			this.x,
 			this.y,
 			this.width,
@@ -39,19 +48,36 @@ class Coin {
 		);
 	}
 
-	drawEffect(charX, chayY) {
+	drawEffect(charX, charY) {
 		this.context.drawImage(
-			this.image,
-			charX + 10,
-			chayY - 30,
-			this.width,
-			this.height
+			this.coin2Image,
+			this.frameIndex * cnst.coinEffectWidth / cnst.numberOfCoinFrames,
+			0,
+			cnst.coinEffectWidth / cnst.numberOfCoinFrames,
+			cnst.coinEffectHeight,
+			charX + 20,
+			charY - 30,
+			cnst.coinEffectWidth / cnst.numberOfCoinFrames,
+			cnst.coinEffectHeight
 		);
-		this.context.rotate(20*Math.PI/180);
 	}
 
-	clearRender() {
-		this.context.clearRect(0, 0, cnst.coinWidth, cnst.coinHeight);
+	updateEffect(reqId) {
+        this.tickCount += 1;
+        if (this.tickCount > this.ticksperFrame) {
+            this.tickCount = 0;
+
+            if (this.frameIndex < 10 - 1) {
+                this.frameIndex += 1;
+            } else {
+				window.cancelAnimationFrame(reqId);
+                this.frameIndex = 0;
+            }
+        }
+	}
+
+	clearRender(x, y) {
+		this.context.clearRect(x, y, cnst.coinWidth, cnst.coinHeight);
 	}
 }
 
