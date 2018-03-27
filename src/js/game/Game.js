@@ -27,6 +27,9 @@ class Game {
         this.score = new Score(this.elScore);
     }
 
+    /**
+     * 게임종료시 실행되던 animationFrame을 정지, 점수 정보를 DB에 요청합니다.
+     */
     gameOver() {
         window.cancelAnimationFrame(this.canvas.charFrameId);
         window.cancelAnimationFrame(this.canvas.blockFrameId);
