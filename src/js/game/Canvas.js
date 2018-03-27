@@ -2,6 +2,7 @@ import cnst from './cnst';
 import Charecter from './Character';
 import Block from './Block';
 import Coin from './Coin';
+import RenderCanvas from './RenderCanvas';
 
 /**
  * Canvas Class
@@ -10,6 +11,7 @@ import Coin from './Coin';
 class Canvas {
     constructor(id, controller) {
         this.canvas = null;
+        this.renderCanvas = null;
         this.context = null;
         this.charecter = null;
         this.block = null;
@@ -17,16 +19,41 @@ class Canvas {
 
         this.id = id;
         this.controller = controller;
-        this.charFrameId = null;
-        this.blockFrameId = null;
-        this.coinFrameId = null;
-
-        this.crash = false;
 
         this.init();
         this.initCharecter();
         this.initBlock();
         this.initCoin();
+
+        this.renderCanvas = new RenderCanvas(this);
+    }
+
+    /**
+     * controller property를 반환합니다.
+     */
+    getController() {
+        return this.controller;
+    }
+
+    /**
+     * charecter property를 반환합니다.
+     */
+    getCharecter() {
+        return this.charecter;
+    }
+
+    /**
+     * block property를 반환합니다.
+     */
+    getBlock() {
+        return this.block;
+    }
+
+    /**
+     * coin property를 반환합니다.
+     */
+    getCoin() {
+        return this.coin;
     }
 
     /**
@@ -67,6 +94,7 @@ class Canvas {
     }
 
     /**
+     * Charecter 객체 초기화
      * Charecter Image load 및 생성
      */
     initCharecter() {
@@ -84,31 +112,12 @@ class Canvas {
         this.charecter.isJump = false;
 
         setTimeout(function() {
-            this.renderCharecter();
+            this.renderCanvas.renderCharecter();
         }.bind(this), 500);
     }
 
     /**
-     * Charecter Image render
-     * requestAnimationFrame 사용하여 함수 지속 호출하여 Image render
-     */
-    renderCharecter() {
-        this.charFrameId = window.requestAnimationFrame(this.renderCharecter.bind(this));
-        if (this.charecter.isJump || this.charecter.isJumpDouble) {
-            this.charecter.gravity += 1.5;
-        } else {
-            if (this.charecter.gravity !== 0) {
-                this.charecter.gravity -= 1.5;
-            } else {
-                this.charecter.isEvent = true;
-            }
-        }
-
-        this.charecter.render();
-    }
-
-    /**
-     * block 초기화
+     * block 객체 초기화
      */
     initBlock() {
         let blockImage = new Image();
@@ -125,29 +134,13 @@ class Canvas {
         this.block = new Block(this.context, oBlockImage);
 
         setTimeout(function() {
-            this.renderBlock();
+            this.renderCanvas.renderBlock();
         }.bind(this), 500);
     }
 
-    renderBlock() {
-        this.blockFrameId = window.requestAnimationFrame(this.renderBlock.bind(this));
-        this.block.render();
-
-        if (this.block.image.src.indexOf('ice') === -1
-        && (this.charecter.x + this.charecter.width > this.block.x + this.block.width / 2
-        && this.charecter.y + this.charecter.height - this.charecter.gravity > this.block.y + this.block.height / 2
-        && this.charecter.x < this.block.x + this.block.width - this.block.width / 2)) {
-            this.crash = true;
-            this.controller.gameOver();
-        } else if (this.block.image.src.indexOf('ice') !== -1
-        && (this.charecter.x + this.charecter.width > this.block.x + this.block.sWidth / 2
-        && this.charecter.y - this.charecter.gravity < this.block.y + this.block.sHeight
-        && this.charecter.x < this.block.x + this.block.sWidth - this.block.sWidth / 2)) {
-            this.crash = true;
-            this.controller.gameOver();
-        }
-    }
-
+    /**
+     * coin 객체 초기화
+     */
     initCoin() {
         let coinImage = new Image();
         let coin2Image = new Image();
@@ -161,30 +154,9 @@ class Canvas {
 
         setTimeout(function() {
             if (!this.crash) {
-                this.renderCoin();
+                this.renderCanvas.renderCoin();
             }
         }.bind(this), 500);
-    }
-
-    renderEffectCoin() {
-        var reqId = window.requestAnimationFrame(this.renderEffectCoin.bind(this));
-        this.coin.renderEffect(this.charecter.x, this.charecter.y, reqId);
-    }
-    renderCoin() {
-        this.coinFrameId = window.requestAnimationFrame(this.renderCoin.bind(this));
-        this.coin.render();
-
-        if (this.charecter.x + this.charecter.width > this.coin.x
-        && this.charecter.y + this.charecter.height - this.charecter.gravity > this.coin.y
-        && this.charecter.x < this.coin.x + this.coin.width) {
-            this.coin.clearRender(this.coin.x, this.coin.y);
-            window.cancelAnimationFrame(this.coinFrameId);
-            this.renderEffectCoin();
-
-            if (!this.crash) {
-                this.initCoin();
-            }
-        }
     }
 }
 

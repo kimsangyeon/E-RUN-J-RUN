@@ -27,10 +27,10 @@ class Game {
         this.score = new Score(this.elScore);
     }
 
-    gameOver() {
-        window.cancelAnimationFrame(this.canvas.charFrameId);
-        window.cancelAnimationFrame(this.canvas.blockFrameId);
-        window.cancelAnimationFrame(this.canvas.coinFrameId);
+    gameOver(charFrameId, blockFrameId, coinFrameId) {
+        window.cancelAnimationFrame(charFrameId);
+        window.cancelAnimationFrame(blockFrameId);
+        window.cancelAnimationFrame(coinFrameId);
         this.score.componentDidClear();
     }
 }

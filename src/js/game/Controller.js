@@ -4,8 +4,8 @@ class Controller {
         this.game = game;
     }
 
-    gameOver() {
-        this.game.gameOver();
+    gameOver(charFrameId, blockFrameId, coinFrameId) {
+        this.game.gameOver(charFrameId, blockFrameId, coinFrameId);
     }
 }
 
