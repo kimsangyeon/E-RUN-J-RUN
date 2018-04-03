@@ -28,8 +28,12 @@ class Score extends React.Component {
         }
 
         return (
-            <div id='eScoreBoard' style={boardStyle}>
-                {"0"}
+            <div>
+                <div id='eScoreBoard' style={boardStyle}>
+                    {"0"}
+                </div>
+                <div id='eScoreList' style={{float:'right'}}>
+                </div>
             </div>
         );
     }
