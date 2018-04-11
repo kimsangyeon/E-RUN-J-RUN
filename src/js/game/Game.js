@@ -28,13 +28,10 @@ class Game {
         this.score.componentDidMount();
     }
 
-    /**
-     * 게임종료시 실행되던 animationFrame을 정지, 점수 정보를 DB에 요청합니다.
-     */
-    gameOver() {
-        window.cancelAnimationFrame(this.canvas.charFrameId);
-        window.cancelAnimationFrame(this.canvas.blockFrameId);
-        window.cancelAnimationFrame(this.canvas.coinFrameId);
+    gameOver(charFrameId, blockFrameId, coinFrameId) {
+        window.cancelAnimationFrame(charFrameId);
+        window.cancelAnimationFrame(blockFrameId);
+        window.cancelAnimationFrame(coinFrameId);
         this.score.componentDidClear();
         this.saveScore('Je', this.score.score);
         this.getScoreList();
