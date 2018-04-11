@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/kimsangyeon/E-RUN-J-RUN#readme",
   "devDependencies": {
+    "axios": "^0.18.0",
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -30,11 +31,19 @@
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.30.1",
+    "request": "^2.85.0",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "http": "0.0.0",
+    "jQuery": "^1.7.4",
+    "jsdom": "^11.6.2",
+    "mongoose": "^5.0.3",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "routes": "^2.1.0"
   }
 }
